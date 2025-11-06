@@ -1,9 +1,9 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import (MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage,CarouselColumn,
-                            CarouselTemplate,MessageAction,URIAction,ImageCarouselColumn,ImageCarouselTemplate,
-                            ImageSendMessage,ButtonTemplate,ConfirmTemplate)
+from linebot.models import (MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, CarouselColumn,
+                            CarouselTemplate, MessageAction, URIAction, ImageCarouselColumn, ImageCarouselTemplate,
+                            ImageSendMessage, ButtonsTemplate, ConfirmTemplate)
 import os
 import html  # 使用標準庫的 escape 函數
 
@@ -52,7 +52,5 @@ def handle_message(event):
         
     
     
-   
-
 if __name__ == "__main__":
     app.run()
