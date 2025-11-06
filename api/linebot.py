@@ -1,7 +1,9 @@
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import (MessageEvent, TextMessage, TextSendMessage)
+from linebot.models import (MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage,CarouselColumn,
+                            CarouselTemplate,MessageAction,URIAction,ImageCarouselColumn,ImageCarouselTemplate,
+                            ImageSendMessage,ButtonTemplate,ConfirmTemplate)
 import os
 import html  # 使用標準庫的 escape 函數
 
@@ -30,12 +32,27 @@ def callback():
 def handle_message(event):
     if event.message.text.lower() == "test":
         reply_message = "第32行的reply_message=改成自己想傳送的訊息"
-    else:
-        reply_message = event.message.text
+        line_bot_api.reply_message(event.reply_token,reply_message)
+        
+    if event.message.text == "confirm":
+        confirm_template = TemplateSendMessage(
+            alt_text = "confirm template",
+            template = ConfirmTemplate(
+                text = 'drink coffee?',
+                actions = [
+                    MessageAction(label='yes',text='yes'),
+                    MessageAction(label='no',text='no')
+                    
+                    ]
+                )
+            
+            )
+        line_bot_api.reply_message(event.reply_token,confirm_template)
+        
+        
     
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=reply_message))
+    
+   
 
 if __name__ == "__main__":
     app.run()
