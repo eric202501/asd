@@ -69,6 +69,63 @@ def handle_message(event):
             )
         )
         line_bot_api.reply_message(event.reply_token, button_template)
+        
+    if event.message.text == "carousel":
+        corousel_template = TemplateSendMessage(
+            alt_text = "carousel",
+            template = CarouselTemplate(
+                columns = [
+                    
+                    CarouselColumn(
+                        thumbnail_image_url="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg",
+                        tittle = "this is menu1",
+                        text = "menu",
+                        actions = [
+                            MessageAction(
+                                label = '喝咖啡有甚麼好處',
+                                text = "有精神"),
+                            URIAction(
+                                label = "伯朗咖啡",
+                                uri = "https://www.mrbrown.com.tw/")]),
+                    CarouselColumn(
+                        thumbnail_image_url="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg",
+                        tittle = "this is menu1",
+                        text = "menu",
+                        actions = [
+                            MessageAction(
+                                label = '喝咖啡有甚麼好處',
+                                text = "有精神"),
+                            URIAction(
+                                label = "伯朗咖啡",
+                                uri = "https://www.mrbrown.com.tw/")])
+                        
+                ]))
+        
+        line_bot_api.reply_message(event.reply_token, corousel_template)
+        
+        
+    if event.message.text == "image":
+        image_carousel_template = TemplateSendMessage(
+            alt_text = "image",
+            template = ImageCarouselTemplate(
+                columns = [
+                    ImageCarouselColumn(
+                        image_url = "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg",
+                        action = URIAction(
+                            label ="博朗咖啡",
+                            uri = "https://www.mrbrown.com.tw/")),
+                    
+                    ImageCarouselColumn(
+                        image_url = "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg",
+                        action = URIAction(
+                            label ="博朗咖啡",
+                            uri = "https://www.mrbrown.com.tw/"))
+                            
+                    ]))
+        
+        line_bot_api.reply_message(event.reply_token, image_carousel_template)          
+                    
+                
 
 if __name__ == "__main__":
     app.run()
