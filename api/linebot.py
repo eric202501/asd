@@ -51,6 +51,24 @@ def handle_message(event):
                 )
             )
         line_bot_api.reply_message(event.reply_token, confirm_template)
+        
+    if event.message.text == 'button':
+        button_template = TemplateSendMessage(
+            alt_text = 'button template',
+            template = ButtonsTemplate(
+                thumbnail_image_url = "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg",
+                tittle = "Brown Cafe",
+                text = "enjoy your coffee",
+                actions = [
+                    MessageAction(
+                        label = '喝咖啡有甚麼好處',
+                        text = "有精神"),
+                    URIAction(
+                        label = "伯朗咖啡",
+                        uri = "https://www.mrbrown.com.tw/")]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token, button_template)
 
 if __name__ == "__main__":
     app.run()
